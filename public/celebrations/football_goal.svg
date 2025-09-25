@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="200" viewBox="0 0 480 200">
+  <defs>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="480" height="200" rx="16" fill="#eff7ff"/>
+  <!-- Goal -->
+  <g transform="translate(300,40)" filter="url(#s)">
+    <rect x="0" y="0" width="150" height="100" rx="6" fill="#ffffff" stroke="#c9d6e8"/>
+    <path d="M0 0 L150 100 M150 0 L0 100 M75 0 L75 100 M0 50 L150 50" stroke="#e6eef8"/>
+  </g>
+  <!-- Ball path -->
+  <path d="M60,150 C150,130 240,120 330,95" fill="none" stroke="#8cd3ff" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+  <!-- Ball -->
+  <g>
+    <circle cx="60" cy="150" r="16" fill="#ffffff" stroke="#1f2937"/>
+    <circle cx="60" cy="150" r="6" fill="#1f2937"/>
+  </g>
+</svg>
