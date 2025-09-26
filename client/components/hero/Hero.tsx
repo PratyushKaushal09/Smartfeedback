@@ -21,6 +21,9 @@ export function Hero(props: HeroProps) {
           <p className="mt-4 text-lg text-muted-foreground max-w-prose">
             {props.subtitle || "Choose your sport and take a quick 10-question pulse. We'll analyze your answers and reveal your fan profile."}
           </p>
+          <div className="mt-3 h-[2px] w-24 rounded-full bg-gradient-to-r from-primary/70 via-accent/70 to-transparent relative overflow-hidden">
+            <span className="absolute inset-0 animate-[shimmer_1.8s_ease_infinite] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+          </div>
         </div>
         <div className="relative">
           <motion.div

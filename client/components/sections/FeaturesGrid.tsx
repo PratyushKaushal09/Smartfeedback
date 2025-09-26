@@ -30,8 +30,9 @@ export default function FeaturesGrid({ heading = "Why Charminar Predicts", subhe
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.35, delay: i * 0.06 }}
-              className="rounded-xl border p-5 bg-white/70 backdrop-blur-sm"
+              className="group relative rounded-xl border p-5 bg-white/55 dark:bg-background/60 backdrop-blur-md ring-1 ring-inset ring-border shadow-sm transition-transform duration-300 hover:shadow-lg hover:translate-y-[-2px]"
             >
+              <div className="pointer-events-none absolute left-4 right-4 top-0 h-px bg-gradient-to-r from-primary/30 via-accent/30 to-transparent" />
               {f.icon && (
                 <div className="text-2xl mb-2">
                   {f.icon.startsWith("/") ? (

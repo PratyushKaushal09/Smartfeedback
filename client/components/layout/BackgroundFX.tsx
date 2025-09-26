@@ -28,6 +28,24 @@ const BackgroundFX = memo(function BackgroundFX() {
 
       {/* Center glow behind main content */}
       <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 h-[22rem] w-[32rem] rounded-[999px] bg-[conic-gradient(from_180deg_at_50%_50%,hsl(var(--primary)/0.22),hsl(var(--accent)/0.22),transparent)] blur-2xl opacity-40" />
+
+      {/* Noise overlay for subtle texture */}
+      <div
+        className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url('data:image/svg+xml;utf8,\
+<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"140\" height=\"140\" viewBox=\"0 0 140 140\">\
+  <filter id=\"n\">\
+    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.8\" numOctaves=\"2\" stitchTiles=\"stitch\"/>\
+    <feColorMatrix type=\"saturate\" values=\"0\"/>\
+  </filter>\
+  <rect width=\"100%\" height=\"100%\" filter=\"url(%23n)\" opacity=\"0.8\"/>\
+</svg>')",
+          backgroundSize: '140px 140px',
+          backgroundRepeat: 'repeat',
+        }}
+      />
     </div>
   );
 });
