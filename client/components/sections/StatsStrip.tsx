@@ -44,7 +44,9 @@ export default function StatsStrip({ stats = [] as { label: string; value: numbe
 function StatCard({ label, value, suffix }: { label: string; value: number; suffix?: string }) {
   const ref = useCountUp(value);
   return (
-    <div className="rounded-xl border p-5 text-center bg-white/70 backdrop-blur-sm">
+    <div className="group relative rounded-xl border p-5 text-center bg-white/55 dark:bg-background/50 backdrop-blur-md ring-1 ring-inset ring-border shadow-sm transition-transform duration-300 hover:shadow-lg hover:translate-y-[-2px]">
+      {/* gradient accent bar */}
+      <div className="pointer-events-none absolute left-4 right-4 top-0 h-px bg-gradient-to-r from-primary/30 via-accent/30 to-transparent" />
       <motion.span
         initial={{ opacity: 0, y: 6 }}
         whileInView={{ opacity: 1, y: 0 }}

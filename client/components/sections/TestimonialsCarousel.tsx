@@ -26,7 +26,7 @@ export default function TestimonialsCarousel({ testimonials = [] as Testimonial[
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3 }}
-              className="rounded-2xl border p-6 bg-white/70 backdrop-blur-sm"
+              className="rounded-2xl border p-6 bg-white/55 dark:bg-background/60 backdrop-blur-md ring-1 ring-inset ring-border shadow-sm"
             >
               <p className="text-lg font-medium">“{items[idx].quote}”</p>
               <div className="mt-3 text-sm text-muted-foreground">
@@ -36,8 +36,8 @@ export default function TestimonialsCarousel({ testimonials = [] as Testimonial[
             </motion.div>
           </AnimatePresence>
           <div className="flex justify-between mt-4">
-            <button onClick={prev} className="text-sm rounded-md border px-3 py-1 hover:bg-accent">Prev</button>
-            <button onClick={next} className="text-sm rounded-md border px-3 py-1 hover:bg-accent">Next</button>
+            <button onClick={prev} className="text-sm rounded-md border px-3 py-1 hover:bg-accent/70 bg-gradient-to-b from-secondary to-transparent">Prev</button>
+            <button onClick={next} className="text-sm rounded-md border px-3 py-1 hover:bg-accent/70 bg-gradient-to-b from-secondary to-transparent">Next</button>
           </div>
         </div>
       </div>

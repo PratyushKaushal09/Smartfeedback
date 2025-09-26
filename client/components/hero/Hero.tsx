@@ -15,7 +15,7 @@ export function Hero(props: HeroProps) {
     <section className="relative overflow-hidden">
       <div className="container grid md:grid-cols-2 gap-10 items-center py-20">
         <div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground to-primary/70">
             {props.title || "Charminar Predicts"}
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-prose">
@@ -27,7 +27,7 @@ export function Hero(props: HeroProps) {
             initial={{ y: 12, rotate: -1 }}
             animate={{ y: -12, rotate: 1 }}
             transition={{ repeat: Infinity, repeatType: "reverse", duration: 3.2, ease: "easeInOut" }}
-            className="relative mx-auto h-64 w-64 sm:h-72 sm:w-72 md:h-80 md:w-80 rounded-3xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/20 p-3 shadow-xl"
+            className="relative mx-auto h-64 w-64 sm:h-72 sm:w-72 md:h-80 md:w-80 rounded-3xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/20 p-3 shadow-xl ring-1 ring-inset ring-border"
             whileHover={{ scale: 1.02, rotate: 0 }}
           >
             <motion.img
@@ -41,6 +41,8 @@ export function Hero(props: HeroProps) {
               transition={{ duration: 0.5, ease: "easeOut" }}
             />
             <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/0 via-white/10 to-white/0 animate-[shimmer_2.2s_ease_infinite]" />
+            {/* Subtle top shine */}
+            <div className="pointer-events-none absolute -top-px left-0 right-0 h-px rounded-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-70" />
             <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-border" />
           </motion.div>
         </div>

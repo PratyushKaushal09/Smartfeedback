@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:bg-background">
-      <div className="container flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-40 w-full border-b bg-white/60 backdrop-blur supports-[backdrop-filter]:bg-white/50 dark:bg-background/60">
+      <div className="container flex h-16 items-center justify-between relative">
         <Link to="/" className="flex items-center gap-3">
           <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden className="text-primary">
             <g fill="currentColor">
@@ -21,8 +21,13 @@ export function SiteHeader() {
           </div>
         </Link>
         <nav className="flex items-center gap-6 text-sm">
-          <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link>
+          <Link to="/" className="group relative text-muted-foreground hover:text-foreground transition-colors">
+            Home
+            <span className="pointer-events-none absolute left-0 -bottom-1 h-px w-0 bg-gradient-to-r from-primary/60 via-accent/60 to-transparent transition-all duration-300 group-hover:w-full" />
+          </Link>
         </nav>
+        {/* Subtle gradient divider at header bottom */}
+        <div className="pointer-events-none absolute left-0 right-0 -bottom-[1px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       </div>
     </header>
   );
