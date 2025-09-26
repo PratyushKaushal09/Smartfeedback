@@ -1,15 +1,63 @@
-# Mystic Zone – Sports Team Predictor
+---
+title: Untitled doc (2)
+---
+<SwmSnippet path="/.dockerignore" line="38">
 
+---
+
+&nbsp;
+
+```
+# server source should be included in Docker build context
+# server
+tmp
+# types should be included if used by the build
+# types
+```
+
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/.gitignore" line="28">
+
+---
+
+&nbsp;
+
+```
+ 
+# Swimm documentation files should NOT be ignored
+!.swm/
+!*.sw.md
+```
+
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/README.md" line="3">
+
+---
+
+&nbsp;
+
+```markdown
 ![Swimm Verify](https://github.com/PratyushKaushal09/Smartfeedback/actions/workflows/swimm-verify.yml/badge.svg)
 
-This app includes a questionnaire that predicts the best matching teams for Football and Cricket based on your attribute preferences. It also supports an optional AI explanation for the results via a secure server-side API.
+```
 
-## Quick Start
+---
 
-- Install deps: `pnpm i`
-- Start dev server: `pnpm dev`
-- Open http://localhost:8080 and click a sport to take the quiz.
+</SwmSnippet>
 
+<SwmSnippet path="/README.md" line="13">
+
+---
+
+&nbsp;
+
+```markdown
 ## Documentation
 
 - Swimm docs live in `.swm/`:
@@ -17,7 +65,19 @@ This app includes a questionnaire that predicts the best matching teams for Foot
   - Architecture Overview: `.swm/architecture-overview.sw.md`
 - CI runs Swimm Verify on PRs to ensure docs stay in sync (see `.github/workflows/swimm-verify.yml`).
 - After pushing to GitHub, you can optionally add a status badge to this README that points to the Swimm Verify workflow.
+```
 
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/README.md" line="21">
+
+---
+
+&nbsp;
+
+```markdown
 ## Contributing
 
 Please read the contribution guide: [CONTRIBUTING.md](./CONTRIBUTING.md)
@@ -32,7 +92,19 @@ Please read the contribution guide: [CONTRIBUTING.md](./CONTRIBUTING.md)
    - Check “Require status checks to pass before merging”.
    - Select the “Swimm Verify” job as a required check.
 4. Open a test PR and confirm the “Swimm Verify” job appears and runs.
+```
 
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/README.md" line="36">
+
+---
+
+&nbsp;
+
+````markdown
 ## Docker
 
 You can run the app in a container using Docker or Docker Compose.
@@ -42,7 +114,19 @@ You can run the app in a container using Docker or Docker Compose.
 ```bash
 # Build the image
 docker build -t mystic-zone:latest .
+````
 
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/README.md" line="46">
+
+---
+
+&nbsp;
+
+````markdown
 # Run the container (exposes port 8080)
 docker run --rm -p 8080:8080 \
   -e VITE_PUBLIC_BUILDER_KEY="$VITE_PUBLIC_BUILDER_KEY" \
@@ -51,7 +135,19 @@ docker run --rm -p 8080:8080 \
 ```
 
 Open http://localhost:8080
+````
 
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/README.md" line="55">
+
+---
+
+&nbsp;
+
+````markdown
 ### Using docker-compose
 
 ```bash
@@ -61,53 +157,33 @@ docker compose up --build
 # Stop
 docker compose down
 ```
+````
 
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/README.md" line="65">
+
+---
+
+&nbsp;
+
+```markdown
 Compose reads environment variables from your shell (and `.env` if present). Public Vite vars must be prefixed `VITE_`.
+```
 
-## Environment Variables
+---
 
-Public variables go in `.env`:
+</SwmSnippet>
 
-- `VITE_PUBLIC_BUILDER_KEY` – Your Builder.io Public API key (already set for demo).
+<SwmSnippet path="/README.md" line="111">
 
-Secrets must NOT be committed. Set them in your dev environment (not in `.env`):
+---
 
-- `OPENROUTER_API_KEY` – Optional. Used by `/api/explain` to generate AI explanations.
+&nbsp;
 
-If `OPENROUTER_API_KEY` is not set, the explanation falls back to a local, rule-based summary.
-
-## New API
-
-- `POST /api/explain`
-  - Request body (JSON):
-    ```json
-    {
-      "sport": "football" | "cricket",
-      "answers": [{ "attributeId": 1, "choice": "yes" }],
-      "topTeams": [{ "id": 1, "name": "Manchester City", "score": 7 }]
-    }
-    ```
-  - Response body (JSON):
-    ```json
-    {
-      "explanation": "...",
-      "usedLLM": true
-    }
-    ```
-
-## Where Things Live
-
-- Questionnaire UI: `client/pages/Quiz.tsx`
-- Shared sports data: `shared/sports.ts`
-- Scoring engine: `shared/scoring.ts`
-- Explain API route: `server/routes/explain.ts` (registered in `server/index.ts`)
-
-## Notes
-
-- The scorer uses a simple, symmetric rule: saying "Yes" to an attribute gives +1 if a team has that attribute and -1 if it does not. "No" is the inverse. "Neutral" contributes 0.
-- Node 18+ is recommended (for native `fetch`). If on older Node, install `undici` or `node-fetch` and wire it in the route.
-- Never hardcode private keys in source control. Set them in your environment.
-
+```markdown
 ## Swimm Docs
 
 - Swimm documentation lives under the `.swm/` directory at the repository root. Example: `.swm/untitled-doc.m5qh15u1.sw.md`.
@@ -115,7 +191,19 @@ If `OPENROUTER_API_KEY` is not set, the explanation falls back to a local, rule-
 - To view and edit docs, install the Swimm app and open this repository. Learn more: https://swimm.io/
 
 ### CI Verification
+```
 
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/README.md" line="119">
+
+---
+
+&nbsp;
+
+```markdown
 - A GitHub Actions workflow is configured at `.github/workflows/swimm-verify.yml`.
 - On every pull request (and pushes to `main`), it runs the Swimm Verify action: `swimmio/swimm-verify-action@v1.4`.
 - This ensures docs stay in sync with code changes. If verification fails, follow the action logs to update or sync the relevant docs in `.swm/`.
@@ -126,3 +214,10 @@ If `OPENROUTER_API_KEY` is not set, the explanation falls back to a local, rule-
 2. Create or update docs under `.swm/`.
 3. Commit the changes (the `.swm/` folder and `*.sw.md` files are included in version control).
 4. Open a PR — CI will verify docs automatically.
+```
+
+---
+
+</SwmSnippet>
+
+<SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBU21hcnRmZWVkYmFjayUzQSUzQVByYXR5dXNoS2F1c2hhbDA5" repo-name="Smartfeedback"><sup>Powered by [Swimm](https://app.swimm.io/)</sup></SwmMeta>

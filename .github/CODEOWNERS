@@ -1,0 +1,12 @@
+# CODEOWNERS - set required reviewers for specific paths.
+# Replace the placeholders with your GitHub usernames or teams.
+# Learn more: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Example: require reviews from specific owners when Swimm docs change
+.swm/** @PratyushKaushal09
+
+# Example: require reviews from owners for server changes
+# server/** @PratyushKaushal09
+
+# Example: require reviews from owners for client changes
+# client/** @PratyushKaushal09

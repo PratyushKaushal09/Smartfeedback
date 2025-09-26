@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mystic-zone:latest
+    ports:
+      - "8080:8080"
+    environment:
+      # Public env for Vite must be prefixed with VITE_
+      - VITE_PUBLIC_BUILDER_KEY=${VITE_PUBLIC_BUILDER_KEY}
+      # Optional: LLM key for explain route
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+    # If you have a local .env file, docker-compose automatically loads it
+    restart: unless-stopped

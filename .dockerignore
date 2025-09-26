@@ -35,9 +35,11 @@ data
 .env
 load-ids.txt
 
-server
+# server source should be included in Docker build context
+# server
 tmp
-types
+# types should be included if used by the build
+# types
 .git
 .gitignore
 dist

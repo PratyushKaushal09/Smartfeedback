@@ -1,0 +1,20 @@
+name: Swimm Verify
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify:
+    name: Verify Swimm Docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # commit history is required for Swimm Verify
+
+      - name: Run Swimm Verify
+        uses: swimmio/swimm-verify-action@v1.4
