@@ -1,5 +1,7 @@
 # Mystic Zone – Sports Team Predictor
 
+Live: https://charminarpredicts.netlify.app/
+
 ![Swimm Verify](https://github.com/PratyushKaushal09/Smartfeedback/actions/workflows/swimm-verify.yml/badge.svg)
 
 This app includes a questionnaire that predicts the best matching teams for Football and Cricket based on your attribute preferences. It also supports an optional AI explanation for the results via a secure server-side API.
@@ -63,6 +65,18 @@ docker compose down
 ```
 
 Compose reads environment variables from your shell (and `.env` if present). Public Vite vars must be prefixed `VITE_`.
+
+## Netlify Deployment
+
+- This project is deployed to Netlify: https://charminarpredicts.netlify.app/
+- Recommended settings (Site settings → Build & deploy):
+  - Base directory: `/`
+  - Build command: `pnpm i --frozen-lockfile && pnpm build`
+  - Publish directory: keep whichever is already working for your site (commonly `dist` or `dist/client` depending on your server bundle). If unsure, try `dist` first.
+- Environment variables (Site settings → Environment):
+  - `VITE_PUBLIC_BUILDER_KEY` (optional)
+  - `OPENROUTER_API_KEY` (optional)
+- Optional: Add a deploy status badge once you have your Site ID from Netlify.
 
 ## Environment Variables
 
