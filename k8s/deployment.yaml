@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mystic-zone
+  labels:
+    app: mystic-zone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mystic-zone
+  template:
+    metadata:
+      labels:
+        app: mystic-zone
+    spec:
+      containers:
+        - name: mystic-zone
+          image: mystic-zone:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: VITE_PUBLIC_BUILDER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mystic-zone-secrets
+                  key: VITE_PUBLIC_BUILDER_KEY
+            - name: OPENROUTER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mystic-zone-secrets
+                  key: OPENROUTER_API_KEY
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mystic-zone-secrets
+  labels:
+    app: mystic-zone
+stringData:
+  # Set your keys (base64 not required with stringData)
+  VITE_PUBLIC_BUILDER_KEY: ""
+  OPENROUTER_API_KEY: ""

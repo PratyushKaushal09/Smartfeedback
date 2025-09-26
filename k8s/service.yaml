@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mystic-zone
+  labels:
+    app: mystic-zone
+spec:
+  selector:
+    app: mystic-zone
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: ClusterIP
