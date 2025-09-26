@@ -286,9 +286,23 @@ export default function Quiz() {
                 <p className="text-sm text-muted-foreground">#{i + 1}</p>
                 <h3 className="text-lg font-bold">{ts.team.name}</h3>
               </div>
-              <div className="text-right">
-                <p className="text-sm text-muted-foreground">Score</p>
-                <p className="text-xl font-extrabold">{Number(ts.score).toFixed(2)}</p>
+              <div className="flex items-center gap-4">
+                {/* Winner photo thumbnail */}
+                <div className="h-16 w-16 overflow-hidden rounded-md ring-1 ring-border bg-muted/40 hidden sm:block">
+                  <img
+                    src={winnerImgPath(sportKey, ts.team.name)}
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = placeholderPath(sportKey);
+                    }}
+                    alt={`${ts.team.name} winner`}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="text-right">
+                  <p className="text-sm text-muted-foreground">Score</p>
+                  <p className="text-xl font-extrabold">{Number(ts.score).toFixed(2)}</p>
+                </div>
               </div>
             </div>
             {ts.matchedAttributes.length > 0 && (
@@ -328,6 +342,25 @@ export default function Quiz() {
           <span className="text-xs font-semibold tracking-wider uppercase">Winner</span>
         </div>
         <h2 className="mt-3 text-3xl font-extrabold">{winner?.team.name}</h2>
+        {/* Large winning photo if available */}
+        {winner?.team?.name && (
+          <motion.div
+            className="mt-4 flex items-center justify-center"
+            initial={{ y: 8, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 220, damping: 18 }}
+          >
+            <img
+              src={winnerImgPath("f1", winner.team.name)}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = placeholderPath("f1");
+              }}
+              alt={`${winner.team.name} winning`}
+              className="h-44 w-auto rounded-md object-cover ring-1 ring-border"
+              loading="eager"
+            />
+          </motion.div>
+        )}
         {logo && (
           <motion.div
             className="mt-4 flex items-center justify-center"
@@ -414,4 +447,22 @@ export default function Quiz() {
       </motion.div>
     );
   }
+}
+
+// Helpers (declared outside the component)
+function slugifyName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function winnerImgPath(sport: SportKey, name: string): string {
+  const slug = slugifyName(name);
+  if (sport === "f1") return `/winners/f1/${slug}.jpg`;
+  return `/winners/${sport}/${slug}.jpg`;
+}
+
+function placeholderPath(sport: SportKey): string {
+  return `/winners/placeholders/${sport}.svg`;
 }
