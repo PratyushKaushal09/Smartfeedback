@@ -6,7 +6,7 @@
 .swm/** @PratyushKaushal09
 
 # Example: require reviews from owners for server changes
-# server/** @PratyushKaushal09
+server/** @PratyushKaushal09
 
 # Example: require reviews from owners for client changes
-# client/** @PratyushKaushal09
+client/** @PratyushKaushal09
