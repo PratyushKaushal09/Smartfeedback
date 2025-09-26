@@ -107,6 +107,14 @@ export default function Quiz() {
   const [soundOn, setSoundOn] = useState(true);
   const [volume, setVolume] = useState(0.8); // 0..1
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const resultsRef = useRef<HTMLDivElement | null>(null);
+
+  // Auto-scroll to results when quiz is finished
+  useEffect(() => {
+    if (finished && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [finished]);
 
   function ensureAudioContext() {
     if (!audioCtxRef.current) {
@@ -199,7 +207,7 @@ export default function Quiz() {
             </div>
           </>
         ) : (
-          <div className="mt-6 rounded-2xl border p-6 bg-card shadow-sm">
+          <div ref={resultsRef} className="mt-6 rounded-2xl border p-6 bg-card shadow-sm">
             <div className="mb-4 flex flex-wrap items-center justify-end gap-3">
               <button onClick={() => setSoundOn((s) => !s)} className="text-sm rounded-md border px-3 py-1 hover:bg-accent">
                 {soundOn ? "Mute" : "Unmute"} Sounds
@@ -350,15 +358,18 @@ export default function Quiz() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 220, damping: 18 }}
           >
-            <img
-              src={winnerImgPath("f1", winner.team.name)}
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = placeholderPath("f1");
-              }}
-              alt={`${winner.team.name} winning`}
-              className="h-44 w-auto rounded-md object-cover ring-1 ring-border"
-              loading="eager"
-            />
+            <picture>
+              <source srcSet={`${winnerImgPath("f1", winner.team.name).replace(/\.jpg$/i, ".webp")}`} type="image/webp" />
+              <img
+                src={winnerImgPath("f1", winner.team.name)}
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = placeholderPath("f1");
+                }}
+                alt={`${winner.team.name} winning`}
+                className="h-44 w-auto rounded-md object-cover ring-1 ring-border"
+                loading="eager"
+              />
+            </picture>
           </motion.div>
         )}
         {logo && (
