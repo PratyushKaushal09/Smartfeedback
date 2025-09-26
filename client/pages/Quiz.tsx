@@ -237,6 +237,7 @@ export default function Quiz() {
             )}
             {key === "football" && (
               <>
+                <FootballWinner />
                 <FootballCelebrate />
                 <div className="mt-8">
                   <h2 className="text-xl font-bold mb-2">Full Rankings</h2>
@@ -290,7 +291,19 @@ export default function Quiz() {
         {top.map((ts, i) => (
           <div key={ts.team.id} className="rounded-lg border p-4">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="flex items-center gap-3">
+                {/* Club logo for football */}
+                {sportKey === "football" && (
+                  <div className="h-9 w-9 rounded-full ring-1 ring-border bg-white/70 flex items-center justify-center overflow-hidden">
+                    <img
+                      src={clubLogoPath(ts.team.name)}
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/logos/football/_placeholder.svg"; }}
+                      alt={`${ts.team.name} logo`}
+                      className="h-full w-full object-contain p-1"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
                 <p className="text-sm text-muted-foreground">#{i + 1}</p>
                 <h3 className="text-lg font-bold">{ts.team.name}</h3>
               </div>
@@ -391,6 +404,39 @@ export default function Quiz() {
     );
   }
 
+  function FootballWinner() {
+    const winner = top[0];
+    if (!winner) return null;
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="winner-card rounded-2xl border p-6 text-center shadow-sm"
+      >
+        <div className="winner-badge mx-auto inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-primary">
+          <span className="pop-bottle text-lg">🏆</span>
+          <span className="text-xs font-semibold tracking-wider uppercase">Winner</span>
+        </div>
+        <div className="mt-3 flex items-center justify-center gap-3">
+          <div className="h-12 w-12 rounded-full ring-1 ring-border bg-white/80 overflow-hidden flex items-center justify-center">
+            <img
+              src={clubLogoPath(winner.team.name)}
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/logos/football/_placeholder.svg"; }}
+              alt={`${winner.team.name} logo`}
+              className="h-full w-full object-contain p-1"
+            />
+          </div>
+          <h2 className="text-3xl font-extrabold">{winner.team.name}</h2>
+        </div>
+        <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-emerald-700">
+          <span className="text-sm font-semibold">Score</span>
+          <span className="text-lg font-extrabold">{Number(winner.score).toFixed(2)}</span>
+        </div>
+      </motion.div>
+    );
+  }
+
   function FootballCelebrate() {
     const [data, setData] = useState<any | null>(null);
     useEffect(() => {
@@ -476,4 +522,9 @@ function winnerImgPath(sport: SportKey, name: string): string {
 
 function placeholderPath(sport: SportKey): string {
   return `/winners/placeholders/${sport}.svg`;
+}
+
+// Football club crest path (svg)
+function clubLogoPath(name: string): string {
+  return `/logos/football/${slugifyName(name)}.svg`;
 }

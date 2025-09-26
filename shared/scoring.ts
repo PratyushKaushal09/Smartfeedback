@@ -154,6 +154,65 @@ function getCricketWeights(): { attrWeight: (id: number) => number; teamBias: (t
 
 function getWeightsForSport(sport: SportKey | string | undefined): { attrWeight?: (id: number) => number; teamBias?: (team: TeamDef) => number } {
   if (sport === "cricket") return getCricketWeights();
+  if (sport === "football") {
+    // Emphasize tactical identity + competitiveness while keeping symmetry
+    // Key buckets (by id range): pressing/possession/build-up, defense, set pieces, star power/history
+    const weights: Record<number, number> = {
+      // Identity / playstyle
+      13: 1.25, // High Press
+      14: 1.2,  // Short Passing
+      15: 1.15, // Build From Back
+      16: 1.15, // Technical Midfield
+      31: 1.15, // Counter-Attack
+      32: 1.1,  // Wing Play
+      33: 1.05, // Through Balls
+      34: 1.0,  // Crossing Frequency
+      37: 1.05, // Inverted Wingers
+      38: 1.05, // Fullback Overlaps
+      39: 1.05, // Sweeper Keeper
+      40: 1.05, // Ball-Playing CB
+      // Competitive edge
+      26: 1.15, // Set Piece Threat
+      27: 1.05, // Home Fortress
+      28: 1.05, // Away Warriors
+      41: 1.1,  // Aerial Dominance
+      21: 1.1,  // Compact Defense
+      22: 1.0,  // Low Block
+      23: 1.05, // Direct Play
+      24: 1.05, // Pace & Power
+      25: 1.0,  // Long Passing
+      // Culture / org strength
+      19: 1.05, // Analytics Adoption
+      20: 1.05, // Sports Science
+      3:  1.05, // Youth Academy
+      44: 1.05, // Academy Integration
+      42: 1.0,  // Backroom Stability
+      43: 1.0,  // Injury Resilience
+      // Narrative/legacy (kept mild so attributes dominate)
+      11: 1.05, // Historic Success
+      17: 1.05, // European Pedigree
+      12: 1.0,  // Global Fanbase
+      18: 1.0,  // Star Signings
+      29: 1.0,  // Modern Stadium
+      6:  1.0,  // Atmospheric Stadium
+    };
+    const attrWeight = (id: number) => weights[id] ?? 1;
+    // Tiny, bounded biases for modern form narratives (kept low)
+    const biasMap: Record<string, number> = {
+      "Manchester City": 0.20,
+      "Real Madrid": 0.18,
+      "Bayern Munich": 0.14,
+      "Liverpool": 0.12,
+      "Arsenal": 0.10,
+      "FC Barcelona": 0.10,
+      "Inter Milan": 0.08,
+      "AC Milan": 0.06,
+      "Atletico Madrid": 0.05,
+      "Paris Saint-Germain": 0.06,
+    };
+    const teamBias = (team: TeamDef) => biasMap[team.name] ?? 0;
+    return { attrWeight, teamBias };
+  }
   if (sport === "f1") {
     // F1 attribute emphasis inspired by sources: qualifying pace, racecraft, tyre/wet management,
     // consistency under pressure, technical feedback, strategy adaptability, fitness.
